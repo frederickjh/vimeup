@@ -13,6 +13,7 @@ def print_hi(name):
 
 
 def check_private_config():
+    """Check that the private configuration file exists and contains valid authentication details."""
     private_config = './private.ini'
     # Check if the private configuration file exists...
     if not os.path.isfile(private_config):
@@ -26,7 +27,7 @@ def check_private_config():
 
 
 def private_config_setup():
-    # Configure private configuration that should only need to be configured once.
+    """ Configure private configuration that should only need to be configured once."""
     sg.theme('LightBlue')
     layout = [[sg.Text('Go to https://developer.vimeo.com/apps/209908 to copy Client Identifier and Client Secrets. There you can also generate a Personal Access Token.', enable_events=True, key='https://developer.vimeo.com/apps/209908')],
                 [sg.Text('Vimeup Client ID', size=(30, 1)), sg.InputText(size=(40, 1), key='client_identifier', tooltip="Enter the client identifier for Vimeup."), sg.Text('40 Characters')],
