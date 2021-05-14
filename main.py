@@ -39,7 +39,10 @@ def private_config_setup():
         client_secret_prefill = ""
     try:
         personal_access_token_prefill = privateconfig["personal_access_token"]
-        password_character = "●"
+        if (not personal_access_token_prefill):
+            password_character = ""
+        else:
+            password_character ="●a6cc33b70824a9af75766beb01458426"
     except:
         personal_access_token_prefill = ""
         password_character = ""
