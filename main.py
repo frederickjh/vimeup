@@ -5,7 +5,7 @@
 import os
 import PySimpleGUI as sg
 from configobj import ConfigObj
-
+import vimeo
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -14,7 +14,6 @@ def print_hi(name):
 
 def check_private_config():
     """Check that the private configuration file exists and contains valid authentication details."""
-    private_config = './private.ini'
     # Check if the private configuration file exists...
     if not os.path.isfile(private_config):
         private_config_setup()
@@ -24,11 +23,11 @@ def check_private_config():
             private_config_setup()
             # ... or values missing? TODO Check for missing values.
             # TODO Can we authenticate?
+    vimeo_test_authentication()
 
 
 def private_config_setup():
     """ Configure private configuration that should only need to be configured once."""
-    privateconfig = ConfigObj('./private.ini')
     try:
         client_identifier_prefill = privateconfig["client_identifier"]
     except:
@@ -66,14 +65,53 @@ def private_config_setup():
     window.close()
 
 
-
 def private_config_write(client_identifier, client_secret, personal_access_token):
     """Writes the private configuration to the private configuration file."""
-    privateconfig = ConfigObj('./private.ini')
+#    privateconfig = ConfigObj('./private.ini')
     privateconfig['client_identifier'] = client_identifier
     privateconfig['client_secret'] = client_secret
     privateconfig['personal_access_token'] = personal_access_token
     privateconfig.write()
 
+
+def vimeo_test_authentication():
+    """Tests if we can authenticate with Vimeo using the private configuration."""
+    client = vimeo.VimeoClient(
+        token=privateconfig['personal_access_token'],
+        key=privateconfig['client_identifier'],
+        secret=privateconfig['client_secret']
+    )
+    # Make the request to the server for the "/me" endpoint.
+    response = client.get('/tutorial')
+    # Make sure we got back a successful response.
+    if not response.status_code == 200:
+        error_dict=response.json()
+        unpack_error_message(**error_dict)
+        sg.theme('LightBlue')
+        layout = [[sg.Text('We were unable to authenticate or connect to Vimeo.', size=(50, 1))],
+                  [sg.Text('The HTTP response code returned was:'), sg.Text(str(response.status_code), text_color="red")],
+                  [sg.Text('The error message was:')],
+                  [sg.Text(error_msg, text_color="red")],
+                  [sg.Button('OK'), sg.Button('Cancel')]]
+        # Create the Window
+        window = sg.Window('Vimeup - Authentication / Connection to Vimeo failed', layout, font=["Arial", 12])
+        # Event Loop to process "events" and get the "values" of the inputs
+        while True:
+            event, values = window.read()
+            if event == 'OK':
+
+                break
+            if event == sg.WIN_CLOSED or event == 'Cancel':  # if user closes window or clicks cancel
+                break
+        window.close()
+
+
+def unpack_error_message(error):
+    global error_msg
+    error_msg = error
+
+
 # ###### MAIN PROGRAM #######
+private_config = './private.ini'
+privateconfig = ConfigObj(private_config)
 check_private_config()
