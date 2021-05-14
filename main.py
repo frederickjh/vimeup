@@ -56,12 +56,21 @@ def private_config_setup():
         event, values = window.read()
         if event == 'OK':
             privateconfig
-            print(values)
+            private_config_write(**values)
             break
         if event == sg.WIN_CLOSED or event == 'Cancel':  # if user closes window or clicks cancel
             break
     window.close()
 
+
+
+def private_config_write(client_identifier, client_secret, personal_access_token):
+    """Writes the private configuration to the private configuration file."""
+    privateconfig = ConfigObj('./private.ini')
+    privateconfig['client_identifier'] = client_identifier
+    privateconfig['client_secret'] = client_secret
+    privateconfig['personal_access_token'] = personal_access_token
+    privateconfig.write()
 
 # ###### MAIN PROGRAM #######
 check_private_config()
