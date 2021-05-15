@@ -5,7 +5,9 @@
 import os
 import PySimpleGUI as sg
 from configobj import ConfigObj
+from validate import Validator
 import vimeo
+import sys
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -21,9 +23,33 @@ def check_private_config():
         # ...or is empty...
         if os.stat(private_config).st_size == 0:
             private_config_setup()
-            # ... or values missing? TODO Check for missing values.
-            # TODO Can we authenticate?
-    vimeo_test_authentication()
+
+    result = privateconfig.validate(validator)
+
+    if result != True:
+        sg.theme('LightBlue')
+        layout = [[sg.Text('The validation of the private configuration failed. This contains the authorization details for the Vimeo API. Without being able to authorize there is not much this program can do.')],
+                  [sg.Text('Would you like to fix the private configuration? Or exit? ')],
+                  [sg.Button('Yes'), sg.Button('Exit')]]
+        # Create the Window
+        window = sg.Window('Vimeup - Private configuration validation failed!', layout, font=["Arial", 12])
+        # Event Loop to process "events" and get the "values" of the inputs
+        while True:
+            event, values = window.read()
+            if event == 'Yes':
+                window.close()
+                private_config_setup()
+                check_private_config()
+                break
+            if event == sg.WIN_CLOSED or event == 'Exit':  # if user closes window or clicks cancel
+                sys.exit(1)
+                break
+        window.close()
+
+    # if os.path.isfile(private_config) and (not os.stat(private_config).st_size == 0):
+    #     vimeo_test_authentication()
+    # else:
+    #     sys.exit('No private configuration file found nor given. Exiting!')
 
 
 def private_config_setup():
@@ -99,7 +125,6 @@ def vimeo_test_authentication():
         while True:
             event, values = window.read()
             if event == 'OK':
-
                 break
             if event == sg.WIN_CLOSED or event == 'Cancel':  # if user closes window or clicks cancel
                 break
@@ -113,5 +138,6 @@ def unpack_error_message(error):
 
 # ###### MAIN PROGRAM #######
 private_config = './private.ini'
-privateconfig = ConfigObj(private_config)
+privateconfig = ConfigObj(private_config, configspec='./privatespec.ini')
+validator = Validator()
 check_private_config()
