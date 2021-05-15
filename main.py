@@ -18,12 +18,8 @@ def print_hi(name):
 def check_private_config():
     """Check that the private configuration file exists and contains valid authentication details."""
     # Check if the private configuration file exists...
-    if not os.path.isfile(private_config):
+    if not os.path.isfile(private_config) or os.stat(private_config).st_size == 0:
         private_config_setup()
-    else:
-        # ...or is empty...
-        if os.stat(private_config).st_size == 0:
-            private_config_setup()
 
     result = privateconfig.validate(validator)
 
@@ -49,7 +45,7 @@ def check_private_config():
 
 
 def private_config_setup():
-    """ Configure private configuration that should only need to be configured once."""
+    """Configure private configuration that should only need to be configured once."""
     try:
         client_identifier_prefill = privateconfig["client_identifier"]
     except:
