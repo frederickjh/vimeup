@@ -85,7 +85,7 @@ def private_config_setup():
         event, values = window.read()
         if event == '-to-vimeo-':
             popupreturned=sg.popup('I will now start a web browser and open the Vimeo developer site so you can get or create the required private configuration for this program, Vimeup.', r'Click OK and the browser will open', title='Vimeup - Launch Vimeo Developer site in web browser?', line_width=70, font=["Arial", 12])
-            if popupreturned == 'OK':  # if user closes
+            if popupreturned == 'OK':
                 # Open web browser window.
                 webbrowser.open(r'https://developer.vimeo.com/apps/209908')
         if event == 'OK':
