@@ -47,11 +47,6 @@ def check_private_config():
                 break
         window.close()
 
-    # if os.path.isfile(private_config) and (not os.stat(private_config).st_size == 0):
-    #     vimeo_test_authentication()
-    # else:
-    #     sys.exit('No private configuration file found nor given. Exiting!')
-
 
 def private_config_setup():
     """ Configure private configuration that should only need to be configured once."""
