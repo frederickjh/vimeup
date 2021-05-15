@@ -8,6 +8,7 @@ from configobj import ConfigObj
 from validate import Validator
 import vimeo
 import sys
+import webbrowser
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -72,7 +73,7 @@ def private_config_setup():
         personal_access_token_prefill = ""
         password_character = ""
     sg.theme('LightBlue')
-    layout = [[sg.Text('Go to https://developer.vimeo.com/apps/209908 to copy Client Identifier and Client Secrets. There you can also generate a Personal Access Token.', enable_events=True, key='https://developer.vimeo.com/apps/209908')],
+    layout = [[sg.Text('On the Vimeo Developer site you can copy the Client Identifier and Client Secrets. You can also generate a Personal Access Token.', enable_events=True, key='https://developer.vimeo.com/apps/209908'),sg.Button('Open Vimeo developer site in a web browser', key='-to-vimeo-')],
                 [sg.Text('Vimeup Client ID', size=(30, 1)), sg.InputText(size=(40, 1), key='client_identifier', default_text=client_identifier_prefill, tooltip="Enter the client identifier for Vimeup."), sg.Text('40 Characters')],
                 [sg.Text('Vimeup Client secret', size=(30, 1), justification='left'), sg.InputText(size=(135, 1), key='client_secret', default_text=client_secret_prefill, tooltip="Enter the client secret for Vimeup."), sg.Text('128 Characters')],
                 [sg.Text('Vimeup Personal Access Token', size=(30, 1)), sg.InputText(size=(38, 1), key='personal_access_token', default_text=personal_access_token_prefill, password_char=password_character, tooltip="Enter the personal access token for Vimeup."), sg.Text('32 Characters'), sg.Text("Generate a new personal access token on Vimeo if you need one.", text_color="red")],
@@ -82,6 +83,11 @@ def private_config_setup():
     # Event Loop to process "events" and get the "values" of the inputs
     while True:
         event, values = window.read()
+        if event == '-to-vimeo-':
+            popupreturned=sg.popup('I will now start a web browser and open the Vimeo developer site so you can get or create the required private configuration for this program, Vimeup.', r'Click OK and the browser will open', title='Vimeup - Launch Vimeo Developer site in web browser?', line_width=70, font=["Arial", 12])
+            if popupreturned == 'OK':  # if user closes
+                # Open web browser window.
+                webbrowser.open(r'https://developer.vimeo.com/apps/209908')
         if event == 'OK':
             privateconfig
             private_config_write(**values)
