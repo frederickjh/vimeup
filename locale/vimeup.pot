@@ -1,0 +1,193 @@
+# Translations template for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-05-17 00:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: vimeup.py:29
+msgid ""
+"The validation of the private configuration failed. This contains the "
+"authorization details for the Vimeo API. Without being able to authorize "
+"there is not much this program can do."
+msgstr ""
+
+#: vimeup.py:30
+msgid "Would you like to fix the private configuration? Or exit? "
+msgstr ""
+
+#: vimeup.py:31 vimeup.py:142
+msgid "Yes"
+msgstr ""
+
+#: vimeup.py:31
+msgid "Exit"
+msgstr ""
+
+#: vimeup.py:33
+msgid "Vimeup - Private configuration validation failed!"
+msgstr ""
+
+#: vimeup.py:68
+msgid ""
+"On the Vimeo Developer site you can copy the Client Identifier and Client"
+" Secrets. You can also generate a Personal Access Token."
+msgstr ""
+
+#: vimeup.py:68
+msgid "Open Vimeo developer site in a web browser"
+msgstr ""
+
+#: vimeup.py:69
+msgid "Vimeup Client ID"
+msgstr ""
+
+#: vimeup.py:69
+msgid "Enter the client identifier for Vimeup."
+msgstr ""
+
+#: vimeup.py:69
+msgid "40 Characters"
+msgstr ""
+
+#: vimeup.py:70
+msgid "Vimeup Client secret"
+msgstr ""
+
+#: vimeup.py:70
+msgid "Enter the client secret for Vimeup."
+msgstr ""
+
+#: vimeup.py:70
+msgid "128 Characters"
+msgstr ""
+
+#: vimeup.py:71
+msgid "Vimeup Personal Access Token"
+msgstr ""
+
+#: vimeup.py:71
+msgid "Enter the personal access token for Vimeup."
+msgstr ""
+
+#: vimeup.py:71
+msgid "32 Characters"
+msgstr ""
+
+#: vimeup.py:71
+msgid "Generate a new personal access token on Vimeo if you need one."
+msgstr ""
+
+#: vimeup.py:72 vimeup.py:117 vimeup.py:183
+msgid "OK"
+msgstr ""
+
+#: vimeup.py:72 vimeup.py:117 vimeup.py:183
+msgid "Cancel"
+msgstr ""
+
+#: vimeup.py:74
+msgid "Vimeup - Private Configuration Setup"
+msgstr ""
+
+#: vimeup.py:79
+msgid ""
+"I will now start a web browser and open the Vimeo developer site so you "
+"can get or create the required private configuration for this program, "
+"Vimeup."
+msgstr ""
+
+#: vimeup.py:79
+msgid "Click OK and the browser will open"
+msgstr ""
+
+#: vimeup.py:79
+msgid "Vimeup - Launch Vimeo Developer site in web browser?"
+msgstr ""
+
+#: vimeup.py:113
+msgid "We were unable to authenticate or connect to Vimeo."
+msgstr ""
+
+#: vimeup.py:114
+msgid "The HTTP response code returned was:"
+msgstr ""
+
+#: vimeup.py:115
+msgid "The error message was:"
+msgstr ""
+
+#: vimeup.py:119
+msgid "Vimeup - Authentication / Connection to Vimeo failed"
+msgstr ""
+
+#: vimeup.py:140
+msgid "The local configuration file either does not exist or is empty."
+msgstr ""
+
+#: vimeup.py:141
+msgid "Would you like to setup the local configuration? Or use the default?"
+msgstr ""
+
+#: vimeup.py:142
+msgid "Use Default local configuration"
+msgstr ""
+
+#: vimeup.py:180
+msgid "Vimeup shared configuration file"
+msgstr ""
+
+#: vimeup.py:180
+msgid ""
+"This is the location and name of the shared Vimeup configuration file. "
+"This can be shared via a file synchronization service."
+msgstr ""
+
+#: vimeup.py:180
+msgid "Choose File"
+msgstr ""
+
+#: vimeup.py:180
+msgid "Configuration Files"
+msgstr ""
+
+#: vimeup.py:180
+msgid "ALL Files"
+msgstr ""
+
+#: vimeup.py:181
+msgid "Vimeup upload directory"
+msgstr ""
+
+#: vimeup.py:181
+msgid "This is the directory Vimeup will first open when you upload a video."
+msgstr ""
+
+#: vimeup.py:181 vimeup.py:182
+msgid "Choose Directory"
+msgstr ""
+
+#: vimeup.py:182
+msgid "Vimeup download directory"
+msgstr ""
+
+#: vimeup.py:182
+msgid "This is the directory Vimeup will first open when you a download video."
+msgstr ""
+
+#: vimeup.py:185
+msgid "Vimeup - Local Configuration Setup"
+msgstr ""
+
