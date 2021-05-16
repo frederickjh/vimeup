@@ -131,8 +131,83 @@ def unpack_error_message(error):
     error_msg = error
 
 
+def check_local_config():
+    """Check that the local configuration file exists and is not empty."""
+    # Check if the local configuration file exists...
+    if not os.path.isfile(local_config) or os.stat(local_config).st_size == 0 :
+        sg.theme('LightBlue')
+        layout = [[sg.Text('The local configuration file either does not exist or is empty.')],
+                  [sg.Text('Would you like setup the local configuration? Or use the default?')],
+                  [sg.Button('Yes'), sg.Button('Use Default local configuration')]]
+        # Create the Window
+        window = sg.Window('Vimeup - Local configuration file missing or empty.', layout, font=["Arial", 12])
+        # Event Loop to process "events" and get the "values" of the inputs
+        while True:
+            event, values = window.read()
+            if event == 'Yes':
+                window.close()
+                local_config_setup()
+                break
+            if event == sg.WIN_CLOSED or event == 'Use Default local configuration':  # if user closes window or choses to use the default local configuration
+                localconfig['shared_configuration_file'] = './shared.ini'
+                localconfig['upload_directory'] = './'
+                localconfig['download_directory'] = './'
+                localconfig.write()
+                break
+        window.close()
+
+    # Validate the private configuration.
+    result = localconfig.validate(validator)
+    if result != True:
+        local_config_setup()
+
+def local_config_setup():
+    """Configure local configuration."""
+    try:
+        shared_configuration_file_prefill = localconfig["shared_configuration_file"]
+    except:
+        shared_configuration_file_prefill = ""
+    try:
+        upload_directory_prefill = localconfig["upload_directory"]
+    except:
+        upload_directory_prefill = ""
+    try:
+        download_directory_prefill = localconfig["download_directory"]
+    except:
+        download_directory_prefill = ""
+    sg.theme('LightBlue')
+    layout = [[sg.Text('Vimeup shared configuration file', size=(30, 1)), sg.InputText(size=(40, 1), key='shared_configuration_file', default_text=shared_configuration_file_prefill, tooltip="This is the location and name of the shared Vimeup configuration file. This can be shared via a file synchronization service."),sg.FileSaveAs(button_text="Choose File", file_types=(("Configuration Files", "*.ini"),("ALL Files", "*.*")), initial_folder="./", default_extension=".ini", key='toss1')],
+                [sg.Text('Vimeup upload directory', size=(30, 1), justification='left'), sg.InputText(size=(40, 1), key='upload_directory', default_text=upload_directory_prefill, tooltip="This is the directory Vimeup will first open when you upload a video."),sg.FolderBrowse(button_text="Choose Directory", initial_folder="./", key='toss2')],
+                [sg.Text('Vimeup download directory', size=(30, 1)), sg.InputText(size=(40, 1), key='download_directory', default_text=download_directory_prefill, tooltip="This is the directory Vimeup will first open when you a download video."),sg.FolderBrowse(button_text="Choose Directory", initial_folder="./", key='toss3')],
+                [sg.Button('OK'), sg.Button('Cancel')]]
+    # Create the Window
+    window = sg.Window('Vimeup - Local Configuration Setup', layout, font=["Arial", 12])
+    # Event Loop to process "events" and get the "values" of the inputs
+    while True:
+        event, values = window.read()
+        if event == 'OK':
+            local_config_write(**values)
+            break
+        if event == sg.WIN_CLOSED or event == 'Cancel':  # if user closes window or clicks cancel
+            break
+    window.close()
+
+
+def local_config_write(shared_configuration_file, upload_directory, download_directory, toss1, toss2, toss3):
+    """Writes the private configuration to the private configuration file."""
+    localconfig['shared_configuration_file'] = shared_configuration_file
+    localconfig['upload_directory'] = upload_directory
+    localconfig['download_directory'] = download_directory
+    localconfig.write()
+
+
 # ###### MAIN PROGRAM #######
+# Private Configuration check and setup
 private_config = './private.ini'
 privateconfig = ConfigObj(private_config, configspec='./privatespec.ini')
 validator = Validator()
 check_private_config()
+# Local Configuration check and setup
+local_config = './local.ini'
+localconfig = ConfigObj(local_config, configspec='./localspec.ini')
+check_local_config()
