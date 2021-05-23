@@ -141,7 +141,7 @@ def check_local_config():
                   [sg.Text(t('Would you like to setup the local configuration? Or use the default?'))],
                   [sg.Button(t('Yes'), key='yes'), sg.Button(t('Use Default local configuration'), key='default')]]
         # Create the Window
-        window = sg.Window('Vimeup - Local configuration file missing or empty.', layout, font=["Arial", 12])
+        window = sg.Window(t('Vimeup - Local configuration file missing or empty'), layout, font=["Arial", 12])
         # Event Loop to process "events" and get the "values" of the inputs
         while True:
             event, values = window.read()
