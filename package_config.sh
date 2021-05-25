@@ -7,5 +7,5 @@ pywin32installer="pywin32-300.win32-py3.6.exe"
 pywin32installerurl="https://github.com/mhammond/pywin32/releases/download/b300/pywin32-300.win32-py3.6.exe"
 
 #
-PYTHON_EXE_WIN="C:\\Python\\python.exe"
-PY_DIR_WIN="C:\\Python"
+PYTHON_EXE_WIN="C:\Python\python.exe"
+PY_DIR_WIN="C:\Python"

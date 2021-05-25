@@ -19,14 +19,14 @@ wget "https://github.com/mhammond/pywin32/releases/download/b300/pywin32-300.win
 cd ..
 build_environment/create.sh
 export WINEPREFIX=/tmp/path-outputted-from-create
-wine start python-3.6.8.exe
+wine start installers/python-3.6.8.exe
 ```
 In the Python installer
 * Tick **Add Python *[version number]* to PATH**
 * Select **Customize installation** > **Next**  > **Customize install location** > 
    * C:\Python
 ```bash
-wine pywin32-300.win32-py3.6.exe
+wine start installers/pywin32-300.win32-py3.6.exe
 build_environment/freeze.sh
 ./package.sh sample-application/src/main.py MySampleProgram
 ```
