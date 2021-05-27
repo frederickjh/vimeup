@@ -80,9 +80,15 @@ wine "${PYTHON_EXE_WIN}" "-m" "PyInstaller" \
     "--name=${PROJECT_NAME}" \
     --onedir \
     --noconsole \
+    --noconfirm \
+    --add-data "privatespec.ini;." \
+    --add-data "localspec.ini;." \
+    --add-data "locale;locale" \
+    --distpath "win-dist" \
+    --workpath "win-build" \
     "${SOURCE_DIR_WIN}\\${MAIN_PY}"
 
 rm -rf ${WINEPREFIX}
 
-echo "Executable available at dist/${PROJECT_NAME}.exe"
+echo "Executable available at win-dist/${PROJECT_NAME}.exe"
 
