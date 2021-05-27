@@ -65,7 +65,6 @@ def private_config_setup():
     except:
         personal_access_token_prefill = ""
         password_character = ""
-    #sg.theme('LightBlue')
     layout = [[sg.Text(t('On the Vimeo Developer site you can copy the Client Identifier and Client Secrets. You can also generate a Personal Access Token.')),sg.Button(t('Open Vimeo developer site in a web browser'), key='-to-vimeo-')],
                 [sg.Text(t('Vimeup Client ID'), size=(30, 1)), sg.InputText(size=(40, 1), key='client_identifier', default_text=client_identifier_prefill, tooltip=t("Enter the client identifier for Vimeup.")), sg.Text(t('40 Characters'))],
                 [sg.Text(t('Vimeup Client secret'), size=(30, 1), justification='left'), sg.InputText(size=(135, 1), key='client_secret', default_text=client_secret_prefill, tooltip=t("Enter the client secret for Vimeup.")), sg.Text(t('128 Characters'))],
@@ -110,7 +109,6 @@ def vimeo_test_authentication():
     if not response.status_code == 200:
         error_dict=response.json()
         unpack_error_message(**error_dict)
-        #sg.theme('LightBlue')
         layout = [[sg.Text(t('We were unable to authenticate or connect to Vimeo.'), size=(50, 1))],
                   [sg.Text(t('The HTTP response code returned was:')), sg.Text(str(response.status_code), text_color="red")],
                   [sg.Text(t('The error message was:'))],
@@ -137,7 +135,6 @@ def check_local_config():
     """Check that the local configuration file exists and is not empty."""
     # Check if the local configuration file exists...
     if not os.path.isfile(local_config) or os.stat(local_config).st_size == 0 :
-        #sg.theme('LightBlue')
         layout = [[sg.Text(t('The local configuration file either does not exist or is empty.'))],
                   [sg.Text(t('Would you like to setup the local configuration? Or use the default?'))],
                   [sg.Button(t('Yes'), key='yes'), sg.Button(t('Use Default local configuration'), key='default')]]
@@ -177,7 +174,6 @@ def local_config_setup():
         download_directory_prefill = localconfig["download_directory"]
     except:
         download_directory_prefill = ""
-    #sg.theme('LightBlue')
     layout = [[sg.Text(t('Vimeup shared configuration file'), size=(40, 1)), sg.InputText(size=(40, 1), key='shared_configuration_file', default_text=shared_configuration_file_prefill, tooltip=t("This is the location and name of the shared Vimeup configuration file. This can be shared via a file synchronization service.")),sg.FileSaveAs(button_text=t("Choose File"), file_types=((t("Configuration Files"), "*.ini"),(t("ALL Files"), "*.*")), initial_folder="./", default_extension=".ini", key='toss1')],
                 [sg.Text(t('Vimeup upload directory'), size=(40, 1), justification='left'), sg.InputText(size=(40, 1), key='upload_directory', default_text=upload_directory_prefill, tooltip=t("This is the directory Vimeup will first open when you upload a video.")),sg.FolderBrowse(button_text=t("Choose Directory"), initial_folder="./", key='toss2')],
                 [sg.Text(t('Vimeup download directory'), size=(40, 1)), sg.InputText(size=(40, 1), key='download_directory', default_text=download_directory_prefill, tooltip=t("This is the directory Vimeup will first open when you a download video.")),sg.FolderBrowse(button_text=t("Choose Directory"), initial_folder="./", key='toss3')],
