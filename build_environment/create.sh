@@ -20,8 +20,8 @@ echo "    $ export WINEPREFIX=${WINEPREFIX}"
 echo
 echo "# STEP 2 #"
 echo "    Run your python installers with wine, eg:"
-echo "    $ wine start installers/"$pythoninstaller
-echo "    $ wine installers/"$pywin32installer
+echo "    $ wine start win-installers/"$pythoninstaller
+echo "    $ wine win-installers/"$pywin32installer
 echo
 echo "# STEP 3 #"
 echo "    Run build_environment/freeze.sh to save back to {WINE_TARBALL}"
