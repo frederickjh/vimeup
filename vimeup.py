@@ -3,6 +3,7 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 import os
+from pathlib import Path
 import PySimpleGUI as sg
 from configobj import ConfigObj
 from validate import Validator
@@ -203,8 +204,11 @@ def local_config_write(shared_configuration_file, upload_directory, download_dir
 
 
 # ###### MAIN PROGRAM #######
+vimeuppath = Path(os.path.dirname(os.path.abspath(__file__)))
+# Change the the directory where our python script or executable is. Otherwise we cannot find our configuration files.
+os.chdir(vimeuppath)
 # Multilingual Support
-localedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'locale')
+localedir = vimeuppath / 'locale'
 translate = gettext.translation('vimeup', localedir, fallback=True)
 t = translate.gettext  # t is for translate
 # Private Configuration check and setup
