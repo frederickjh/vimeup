@@ -1,5 +1,5 @@
 # Ignore configuration files (*.ini), but not configuration spec files (*spec.ini).
-/*.ini
+/vimeo-configuration/*
 !/*spec.ini
 
 # Ignore Windows installers, build, distribution, and installation files

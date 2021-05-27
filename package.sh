@@ -89,6 +89,7 @@ wine "${PYTHON_EXE_WIN}" "-m" "PyInstaller" \
     "${SOURCE_DIR_WIN}\\${MAIN_PY}"
 
 rm -rf ${WINEPREFIX}
+mkdir -p win-dist/${PROJECT_NAME}/vimeo-configuration
 
-echo "Executable available at win-dist/${PROJECT_NAME}.exe"
+echo "Executable available at win-dist/${PROJECT_NAME}/${PROJECT_NAME}.exe"
 

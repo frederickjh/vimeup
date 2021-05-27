@@ -212,11 +212,11 @@ localedir = vimeuppath / 'locale'
 translate = gettext.translation('vimeup', localedir, fallback=True)
 t = translate.gettext  # t is for translate
 # Private Configuration check and setup
-private_config = './private.ini'
+private_config = os.path.normpath('./vimeo-configuration/private.ini')
 privateconfig = ConfigObj(private_config, configspec='./privatespec.ini')
 validator = Validator()
 check_private_config()
 # Local Configuration check and setup
-local_config = './local.ini'
+local_config = os.path.normpath('./vimeo-configuration/local.ini')
 localconfig = ConfigObj(local_config, configspec='./localspec.ini')
 check_local_config()
