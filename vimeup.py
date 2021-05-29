@@ -229,20 +229,34 @@ def local_config_write(shared_configuration_file, upload_directory, download_dir
 
 
 # ###### MAIN PROGRAM #######
-vimeuppath = Path(os.path.dirname(os.path.abspath(__file__)))
 # Change the the directory where our python script or executable is. Otherwise we cannot find our configuration files.
+vimeuppath = Path(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(vimeuppath)
+
 # Set default pysimplegui window options.
 sg.theme('LightBlue')
+if sys.platform == "linux":
+    vimeuplogo = os.path.normpath('logo/vimeup.png')
+elif sys.platform == "win32":
+    vimeuplogo = os.path.normpath('logo/vimeup.ico')
+sg.set_global_icon(vimeuplogo)
+
+# Splash Screen
+vimeupsplash = os.path.normpath('logo/vimeup.png')
+DISPLAY_TIME_MILLISECONDS = 4000
+sg.Window('Window Title', [[sg.Image(filename=vimeupsplash)]], no_titlebar=True, keep_on_top=True).read(timeout=DISPLAY_TIME_MILLISECONDS, close=True)
+
 # Multilingual Support
 localedir = vimeuppath / 'locale'
 translate = gettext.translation('vimeup', localedir, fallback=True)
 t = translate.gettext  # t is for translate
+
 # Private Configuration check and setup
 private_config = os.path.normpath('./vimeo-configuration/private.ini')
 privateconfig = ConfigObj(private_config, configspec='./privatespec.ini')
 validator = Validator()
 check_private_config()
+
 # Local Configuration check and setup
 local_config = os.path.normpath('./vimeo-configuration/local.ini')
 localconfig = ConfigObj(local_config, configspec='./localspec.ini')
