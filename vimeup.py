@@ -33,7 +33,7 @@ def check_private_config():
                   [sg.Text(t('Would you like to fix the private configuration? Or exit? '))],
                   [sg.Button(t('Yes'), key='yes'), sg.Button(t('Exit'), key='exit')]]
         # Create the Window
-        window = sg.Window(t('Vimeup - Private configuration validation failed!'), layout, font='Arial 12')
+        window = sg.Window(t('Vimeup - Private configuration validation failed!'), layout)
         # Event Loop to process "events" and get the "values" of the inputs
         while True:
             event, values = window.read()
@@ -82,7 +82,7 @@ def private_config_setup():
                sg.Text(t("Generate a new personal access token on Vimeo if you need one."), text_color="red")],
               [sg.Button(t('OK'), key='ok'), sg.Button(t('Cancel'), key='cancel')]]
     # Create the Window
-    window = sg.Window(t('Vimeup - Private Configuration Setup'), layout, font='Arial 12')
+    window = sg.Window(t('Vimeup - Private Configuration Setup'), layout)
     # Event Loop to process "events" and get the "values" of the inputs
     while True:
         event, values = window.read()
@@ -90,8 +90,7 @@ def private_config_setup():
             popupreturned = sg.popup(t(
                 'I will now start a web browser and open the Vimeo developer site so you can get or create the required private configuration for this program, Vimeup.'),
                                      t('Click OK and the browser will open'),
-                                     title=t('Vimeup - Launch Vimeo Developer site in web browser?'), line_width=70,
-                                     font='Arial 12')
+                                     title=t('Vimeup - Launch Vimeo Developer site in web browser?'), line_width=70)
             if popupreturned == 'OK':
                 # Open web browser window.
                 webbrowser.open('https://developer.vimeo.com/apps/209908')
@@ -131,7 +130,7 @@ def vimeo_test_authentication():
                   [sg.Text(error_msg, text_color="red")],
                   [sg.Button(t('OK'), key='ok'), sg.Button(t('Cancel'), key='cancel')]]
         # Create the Window
-        window = sg.Window(t('Vimeup - Authentication / Connection to Vimeo failed'), layout, font='Arial 12')
+        window = sg.Window(t('Vimeup - Authentication / Connection to Vimeo failed'), layout)
         # Event Loop to process "events" and get the "values" of the inputs
         while True:
             event, values = window.read()
@@ -155,7 +154,7 @@ def check_local_config():
                   [sg.Text(t('Would you like to setup the local configuration? Or use the default?'))],
                   [sg.Button(t('Yes'), key='yes'), sg.Button(t('Use Default local configuration'), key='default')]]
         # Create the Window
-        window = sg.Window(t('Vimeup - Local configuration file missing or empty'), layout, font='Arial 12')
+        window = sg.Window(t('Vimeup - Local configuration file missing or empty'), layout)
         # Event Loop to process "events" and get the "values" of the inputs
         while True:
             event, values = window.read()
@@ -208,7 +207,7 @@ def local_config_setup():
                sg.FolderBrowse(button_text=t("Choose Directory"), initial_folder="./", key='toss3')],
               [sg.Button(t('OK'), key='ok'), sg.Button(t('Cancel'), key='cancel')]]
     # Create the Window
-    window = sg.Window(t('Vimeup - Local Configuration Setup'), layout, font='Arial 12')
+    window = sg.Window(t('Vimeup - Local Configuration Setup'), layout)
     # Event Loop to process "events" and get the "values" of the inputs
     while True:
         event, values = window.read()
@@ -234,12 +233,12 @@ vimeuppath = Path(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(vimeuppath)
 
 # Set default pysimplegui window options.
-sg.theme('LightBlue')
 if sys.platform == "linux":
     vimeuplogo = os.path.normpath('logo/vimeup.png')
 elif sys.platform == "win32":
     vimeuplogo = os.path.normpath('logo/vimeup.ico')
-sg.set_global_icon(vimeuplogo)
+
+sg.set_options(icon=vimeuplogo,  font='Arial 12', ttk_theme='LightBlue')
 
 # Splash Screen
 vimeupsplash = os.path.normpath('logo/vimeup.png')
