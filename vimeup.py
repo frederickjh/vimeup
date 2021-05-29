@@ -227,6 +227,33 @@ def local_config_write(shared_configuration_file, upload_directory, download_dir
     localconfig.write()
 
 
+def mainwindow():
+    MENU_KEY_SEPARATOR='::'
+    # ------ Menu Definition ------ #
+    menu_def = [[t('&File'), [t('&Settings'), [t('Private'), t('Local'), t('Shared'), ], t('E&xit'), ], ],
+                [t('&Help'), t('&About...')], ]
+
+    # ------ GUI Defintion ------ #
+    layout = [[sg.Menu(menu_def, )],
+              [sg.Text('', size=(100, 20))],
+              [sg.Text('Status Bar', relief=sg.RELIEF_SUNKEN,
+                    size=(55, 1), pad=(0, 3), key='-status-')]
+              ]
+
+    window = sg.Window(t('Vimeup - Your Vimeo Helper'), layout)
+
+    # ---===--- Loop taking in user input --- #
+    while True:
+        button, key = window.read()
+        print(button)
+        if button in ('-close-', 'Exit') or button is None:
+            break       # exit button clicked
+        elif button == '-timer-':
+            pass        # add your call to launch a timer program
+        elif button == '-cpu-':
+            pass        # add your call to launch a CPU measuring utility
+
+
 # ###### MAIN PROGRAM #######
 # Change the the directory where our python script or executable is. Otherwise we cannot find our configuration files.
 vimeuppath = Path(os.path.dirname(os.path.abspath(__file__)))
@@ -260,3 +287,8 @@ check_private_config()
 local_config = os.path.normpath('./vimeo-configuration/local.ini')
 localconfig = ConfigObj(local_config, configspec='./localspec.ini')
 check_local_config()
+
+
+# Main Window
+if __name__ == '__main__':
+    mainwindow()

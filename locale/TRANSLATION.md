@@ -1,6 +1,6 @@
 # Translation of Vimeup
 
-Code has been added to strings in Vimeup that will need to be translated to have the user interface in another language. After adding new string to the code the following command can be run to update the vimeup.pot file that can be used to create new translations from or update existing translations.
+When code has been added the strings in Vimeup that will need to be translated to have the user interface in another language. After adding new string to the code the following command can be run to update the vimeup.pot file that can be used to create new translations from or update existing translations.
 
 ``` bash
 pybabel extract --keywords=t ./vimeup.py -o locale/vimeup.pot
