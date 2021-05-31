@@ -162,12 +162,14 @@ def check_local_config():
                 window.close()
                 local_config_setup()
                 break
-            if event == sg.WIN_CLOSED or event == 'default':  # if user closes window or choses to use the default local configuration
+            if  event == 'default':   # User chooses to use the default local configuration
                 localconfig['shared_configuration_file'] = './shared.ini'
                 localconfig['upload_directory'] = './'
                 localconfig['download_directory'] = './'
                 localconfig.write()
                 break
+            if event == sg.WIN_CLOSED: # if user closes window
+                sys.exit(1)
         window.close()
 
     # Validate the private configuration.
@@ -215,7 +217,7 @@ def local_config_setup():
             local_config_write(**values)
             break
         if event == sg.WIN_CLOSED or event == 'cancel':  # if user closes window or clicks cancel
-            break
+            sys.exit(1)
     window.close()
 
 
