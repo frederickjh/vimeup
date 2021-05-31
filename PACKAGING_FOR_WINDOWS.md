@@ -42,9 +42,6 @@ This will create a Wine environment in a tarball at
 If you want to use a different Python version or add additional Python
 modules, just do the above with different Windows Python installers.
 
-### Known Issues
-* sample-application does not work with Python 3, pull requests welcome.
-
 ## Inno Setup
 
 [Inno Setup](https://jrsoftware.org/isinfo.php) can be used with wine on Linux to create a Windows' Installer. *Inno Setup* is a know application in Play on Linux and can be used to create an installer for Vimeup using its *Inno Setup Script* file `vimeup.iss` that is saved in the repository.
