@@ -82,7 +82,7 @@ def private_config_setup():
                sg.Text(t("Generate a new personal access token on Vimeo if you need one."), text_color="red")],
               [sg.Button(t('OK'), key='ok'), sg.Button(t('Cancel'), key='cancel')]]
     # Create the Window
-    window = sg.Window(t('Vimeup - Private Configuration Setup'), layout)
+    window = sg.Window(t('Vimeup - Private Configuration Setup'), layout, font='Arial 11')
     # Event Loop to process "events" and get the "values" of the inputs
     while True:
         event, values = window.read()
