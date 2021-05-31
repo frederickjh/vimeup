@@ -266,6 +266,8 @@ if sys.platform == "linux":
     vimeuplogo = os.path.normpath('logo/vimeup.png')
 elif sys.platform == "win32":
     vimeuplogo = os.path.normpath('logo/vimeup.ico')
+else:
+    vimeuplogo = os.path.normpath('logo/vimeup.png')
 
 sg.set_options(icon=vimeuplogo, font='Arial 12', ttk_theme='LightBlue')
 
