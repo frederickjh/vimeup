@@ -267,7 +267,7 @@ if sys.platform == "linux":
 elif sys.platform == "win32":
     vimeuplogo = os.path.normpath('logo/vimeup.ico')
 
-sg.set_options(icon=vimeuplogo,  font='Arial 12', ttk_theme='LightBlue')
+sg.set_options(icon=vimeuplogo, font='Arial 12', ttk_theme='LightBlue')
 
 # Splash Screen
 vimeupsplash = os.path.normpath('logo/vimeup.png')
