@@ -3,6 +3,7 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 import os
+import pathlib
 from pathlib import Path
 import PySimpleGUI as sg
 from configobj import ConfigObj
@@ -11,6 +12,7 @@ import vimeo
 import sys
 import webbrowser
 import gettext
+from appdirs import *
 
 
 def print_hi(name):
@@ -257,9 +259,25 @@ def mainwindow():
 
 
 # ###### MAIN PROGRAM #######
-# Change the the directory where our python script or executable is. Otherwise we cannot find our configuration files.
+# Get the path to our executable
 vimeuppath = Path(os.path.dirname(os.path.abspath(__file__)))
+# cd to the directory where our python script or executable is, otherwise we cannot find our configuration spec files.
 os.chdir(vimeuppath)
+
+# Setup the location for Vimeup configuration files and create it if it does not exist.
+# Windows: C:\users\<User>\Local Settings\Application Data\Frederick Henderson\vimeup
+# Linux: /home/<User>/.config/vimeup
+# wine: /<WINEPREFIX>/drive_c/users/<User>/Local Settings/Application Data/Frederick Henderson/vimeup/
+# WINEPREFIX is an environment variable, so
+# ls -l lla $WINEPREFIX/dosdevices/c:/users/$USER/Local\ Settings/Application\ Data/Frederick\ Henderson/vimeup/
+# will list the Vimeup configuration files for wine.
+
+appname = "vimeup"
+appauthor = "Frederick Henderson"
+vimeupconfigpath = os.path.realpath(user_config_dir(appname, appauthor))
+
+if not os.path.isdir(vimeupconfigpath):
+    pathlib.Path(vimeupconfigpath).mkdir(parents=True, exist_ok=True)
 
 # Set default pysimplegui window options.
 if sys.platform == "linux":
@@ -282,13 +300,13 @@ translate = gettext.translation('vimeup', localedir, fallback=True)
 t = translate.gettext  # t is for translate
 
 # Private Configuration check and setup
-private_config = os.path.normpath('./vimeo-configuration/private.ini')
+private_config = os.path.join(vimeupconfigpath, 'private.ini')
 privateconfig = ConfigObj(private_config, configspec='./privatespec.ini')
 validator = Validator()
 check_private_config()
 
 # Local Configuration check and setup
-local_config = os.path.normpath('./vimeo-configuration/local.ini')
+local_config = os.path.join(vimeupconfigpath, 'local.ini')
 localconfig = ConfigObj(local_config, configspec='./localspec.ini')
 check_local_config()
 
